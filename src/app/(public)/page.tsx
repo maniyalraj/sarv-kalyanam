@@ -1,15 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Phone, Heart, Users, Stethoscope, Building2, Star, Clock, MapPin, CheckCircle, Award, Play, ChevronRight } from "lucide-react"
+import { ArrowRight, Phone, Heart, Users, Stethoscope, Building2, Star, Clock, CheckCircle, Award, ChevronRight } from "lucide-react"
 import { Button, Card, CardContent } from "@/components/ui"
 import { departments, doctors, testimonials, services } from "@/lib/data"
-
-const heroImages = [
-  "https://placehold.co/1920x1080/0f766e/ffffff?text=Hospital+Hero",
-  "https://placehold.co/1920x1080/0f766e/ffffff?text=Medical+Care", 
-  "https://placehold.co/1920x1080/0f766e/ffffff?text=Expert+Doctors",
-]
 
 const stats = [
   { label: "Years of Service", value: "20+" },
@@ -18,29 +12,11 @@ const stats = [
   { label: "Beds Capacity", value: "200+" },
 ]
 
-const departmentImages: Record<string, string> = {
-  "Cardiology": "https://placehold.co/400x300/ef4444/ffffff?text=Cardiology",
-  "Neurology": "https://placehold.co/400x300/8b5cf6/ffffff?text=Neurology",
-  "Orthopedics": "https://placehold.co/400x300/f59e0b/ffffff?text=Orthopedics",
-  "Pediatrics": "https://placehold.co/400x300/10b981/ffffff?text=Pediatrics",
-  "Gynecology": "https://placehold.co/400x300/ec4899/ffffff?text=Gynecology",
-  "General Medicine": "https://placehold.co/400x300/3b82f6/ffffff?text=General+Medicine",
-  "Emergency": "https://placehold.co/400x300/dc2626/ffffff?text=Emergency",
-  "Diagnostics": "https://placehold.co/400x300/6366f1/ffffff?text=Diagnostics",
-}
-
-const doctorImages = [
-  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Sharma",
-  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Patel", 
-  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Kumar",
-  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Reddy",
-  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Singh",
-  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Joshi",
+const featuredDoctors = [
+  { name: "Dr. Pankaj Kasar", specialty: "Cardiology", image: "https://www.surakshaheartclinic.com/wp-content/uploads/2022/02/Untitled-design3.png" },
+  { name: "Dr. Raghunath Khade", specialty: "Orthopedics", image: "https://placehold.co/400x400/7c3aed/ffffff?text=Dr+Raghunath+Khade" },
+  { name: "Dr. Pankaj S", specialty: "Neurology", image: "https://placehold.co/400x400/10b981/ffffff?text=Dr+Pankaj+S" },
 ]
-
-const doctorsPageImage = "https://placehold.co/1920x600/0f766e/ffffff?text=Our+Expert+Doctors"
-const emergencyImage = "https://placehold.co/1920x800/dc2626/ffffff?text=Emergency+Care"
-const bookingDoctorImage = "https://placehold.co/200x200/0f766e/ffffff?text=Doctor"
 
 function FeatureCard({ icon: Icon, title, description, delay }: { icon: any; title: string; description: string; delay: string }) {
   return ( 
@@ -69,59 +45,93 @@ function StatBar({ label, value }: { label: string; value: string }) {
   )
 }
 
+function FeaturedDoctor({ doctor, index }: { doctor: typeof featuredDoctors[0]; index: number }) {
+  return (
+    <div className="group relative">
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 blur-xl opacity-40 group-hover:opacity-60 transition-opacity" />
+      <div className="relative rounded-full overflow-hidden border-4 border-white shadow-2xl">
+        <img 
+          src={doctor.image} 
+          alt={doctor.name}
+          className="h-48 w-48 object-cover bg-slate-100"
+        />
+      </div>
+      <div className="mt-4 text-center">
+        <p className="font-bold text-white">{doctor.name}</p>
+        <p className="text-sm text-primary-200">{doctor.specialty}</p>
+      </div>
+    </div>
+  )
+}
+
 export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(15,118,110,0.3),transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(15,118,110,0.2),transparent_40%)]" />
         </div>
         
-        <div className="relative mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-sm font-medium text-primary-300 backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400"></span>
-              </span>
-              24x7 Emergency Services Available
-            </div>
-            
-            <h1 className="text-5xl font-bold tracking-tight text-white md:text-7xl lg:text-8xl">
-              Your Health Is Our{" "}
-              <span className="bg-gradient-to-r from-primary-400 to-primary-200 bg-clip-text text-transparent">
-                Priority
-              </span>
-            </h1>
-            
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300 md:text-xl">
-              Experience world-class healthcare with compassionate care. Our expert team 
-              combines advanced technology with personalized treatment for you and your family.
-            </p>
-            
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link href="/book">
-                <Button size="xl" className="bg-primary-500 hover:bg-primary-600 shadow-glow">
-                  Book Appointment
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="tel:+919867452190">
-                <Button variant="outline" size="xl" className="border-white/30 text-white hover:bg-white/10 hover:border-white/50">
-                  <Phone className="mr-2 h-5 w-5" />
-                  Call: +91 9867 4521 90
-                </Button>
-              </Link>
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 w-full">
+          <div className="grid gap-12 lg:grid-cols-2 items-center">
+            {/* Left Content */}
+            <div className="max-w-2xl">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-sm font-medium text-primary-300 backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400"></span>
+                </span>
+                24x7 Emergency Services Available
+              </div>
+              
+              <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
+                Your Health Is Our{" "}
+                <span className="bg-gradient-to-r from-primary-400 to-primary-200 bg-clip-text text-transparent">
+                  Priority
+                </span>
+              </h1>
+              
+              <p className="mt-6 text-lg leading-relaxed text-slate-300 md:text-xl">
+                Experience world-class healthcare with compassionate care. Our expert team 
+                combines advanced technology with personalized treatment.
+              </p>
+              
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <Link href="/book">
+                  <Button size="xl" className="bg-primary-500 hover:bg-primary-600 shadow-glow">
+                    Book Appointment
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="tel:+919867452190">
+                  <Button variant="outline" size="xl" className="border-white/30 text-white hover:bg-white/10">
+                    <Phone className="mr-2 h-5 w-5" />
+                    Call: +91 9867 4521 90
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="mt-16 grid grid-cols-2 gap-8 border-t border-white/10 pt-8 md:grid-cols-4">
+                {stats.map((stat) => (
+                  <StatBar key={stat.label} {...stat} />
+                ))}
+              </div>
             </div>
 
-            {/* Quick Stats */}
-            <div className="mt-16 grid grid-cols-2 gap-8 border-t border-white/10 pt-8 md:grid-cols-4">
-              {stats.map((stat) => (
-                <StatBar key={stat.label} {...stat} />
-              ))}
+            {/* Right - Featured Doctors Circle */}
+            <div className="hidden lg:flex flex-col items-center">
+              <div className="relative">
+                <div className="flex items-center justify-center gap-8">
+                  {featuredDoctors.map((doctor, index) => (
+                    <FeaturedDoctor key={index} doctor={doctor} index={index} />
+                  ))}
+                </div>
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/10 px-4 py-2 text-sm text-white/80 backdrop-blur-sm">
+                  Meet Our Expert Team
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -229,11 +239,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features / Why Choose Us */}
+      {/* Features */}
       <section className="bg-gradient-to-br from-slate-50 to-white py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">Why Choose SarvKalyanam</h2>
+            <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">Why Choose Sarvakalyanam</h2>
             <p className="mt-2 text-slate-600">Excellence in healthcare since 2000</p>
           </div>
           
@@ -272,8 +282,7 @@ export default function HomePage() {
               Need Emergency Care?
             </h2>
             <p className="mt-4 text-lg text-red-100">
-              Our 24x7 emergency department is equipped to handle all medical emergencies. 
-              Call now for immediate assistance.
+              Our 24x7 emergency department is equipped to handle all medical emergencies.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Link href="tel:+919867452190">
@@ -313,9 +322,7 @@ export default function HomePage() {
                   <h3 className="text-lg font-bold text-slate-900">{service.name}</h3>
                   <p className="mt-1 text-sm text-slate-600">{service.description}</p>
                   {service.waitingTime && (
-                    <p className="mt-2 text-xs font-medium text-primary-600">
-                      {service.waitingTime}
-                    </p>
+                    <p className="mt-2 text-xs font-medium text-primary-600">{service.waitingTime}</p>
                   )}
                 </div>
               </div>

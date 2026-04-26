@@ -31,8 +31,8 @@ export function Header() {
                 <Heart className="h-5 w-5 text-white" />
               </div>
               <div className="hidden sm:block">
-                <span className="text-lg font-bold text-slate-900">SarvKalyanam</span>
-                <p className="-mt-1 text-xs text-primary-600">Hospital</p>
+                <span className="text-lg font-bold text-slate-900">Sarvakalyanam</span>
+                <p className="-mt-1 text-xs text-primary-600">Super Speciality Hospital</p>
               </div>
             </Link>
           </div>

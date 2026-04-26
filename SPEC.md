@@ -1,45 +1,59 @@
-# SarvKalyanam Hospital Website - Technical Specification
+# Sarvakalyanam Super Speciality Hospital - Technical Specification
 
 ## Overview
-A modern, production-ready hospital website for SarvKalyanam Hospital, Kalyan, India. Features appointment booking, doctor management, admin panel, and Google Calendar integration.
+A modern, production-ready hospital website for Sarvakalyanam Super Speciality Hospital, Kalyan, India. Features appointment booking, doctor management, admin panel, and modern UI design.
+
+## Hospital Info
+- **Name:** Sarvakalyanam Super Speciality Hospital
+- **Location:** Kalyan (W), Thane, Maharashtra 421301
+- **Phone:** +91 9867 4521 90
+- **Emergency:** 24x7
+- **Founded:** 2000+
 
 ## Tech Stack
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **Icons**: Lucide React
-- **Calendar**: Google Calendar API
-- **State**: React hooks + Context
-- **Database**: Simulated with local storage (production-ready structure)
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **UI Components:** Custom shadcn-style components
+- **Icons:** Lucide React
+- **State:** React hooks + localStorage
+- **Build:** Working npm build
 
 ## Color Palette
 ```css
---primary: #2563EB;        /* Blue - trust, medical */
---primary-light: #3B82F6;
+--primary: #0F766E;        /* Teal - trust, health */
+--primary-light: #14B8A6;
+--primary-dark: #0D9488;
 --secondary: #7C3AED;     /* Purple - premium */
---accent: #EC4899;         /* Pink - warmth */
---success: #10B981;       /* Green - health */
+--accent: #F59E0B;        /* Amber */
+--success: #10B981;        /* Green */
 --background: #FFFFFF;
 --surface: #F8FAFC;
+--dark: #0F172A;          /* Dark theme accent */
 --text-primary: #1E293B;
 --text-secondary: #64748B;
 ```
 
+## Featured Doctors (Homepage Hero)
+1. Dr. Pankaj Kasar - Cardiology
+2. Dr. Raghunath Khade - Orthopedics
+3. Dr. Pankaj S - Neurology
+
 ## Design System
-- **Typography**: Inter (headings), system sans-serif fallback
-- **Spacing**: 4px base unit system
-- **Border Radius**: 8px (cards), 12px (buttons), 16px (modals)
-- **Shadows**: Soft, layered (sm, md, lg variants)
-- **Gradients**: Soft linear gradients for hero and CTAs
-- **Animations**: 200-300ms transitions, subtle hover effects
+- **Typography:** 
+  - Headings: Poppins (bold, modern)
+  - Body: Inter (clean, readable)
+- **Spacing:** 4px base unit system
+- **Border Radius:** 8px (cards), 12px (buttons), 24px (large)
+- **Shadows:** Soft, layered (sm, md, lg variants)
+- **Animations:** Smooth transitions, hover effects
 
 ## Project Structure
 ```
 src/
 ├── app/
 │   ├── (public)/
-│   │   ├── page.tsx              # Homepage
+│   │   ├── page.tsx          # Homepage
 │   │   ├── doctors/
 │   │   ├── departments/
 │   │   ├── rooms-rates/
@@ -48,113 +62,82 @@ src/
 │   │   ├── contact/
 │   │   ├── insurance/
 │   │   ├── faq/
-│   │   └── book/
-│   ├── admin/                    # Protected admin routes
-│   └── layout.tsx
+│   │   └── book/             # Appointment booking
+│   ├── admin/                 # Protected admin routes
+│   ├── api/                   # API routes
+│   ├── layout.tsx
+│   └── globals.css
 ├── components/
-│   ├── ui/                       # Base UI components
-│   ├── layout/                   # Header, Footer, Navigation
-│   ├── home/                     # Homepage sections
-│   ├── doctors/                  # Doctor components
-│   ├── booking/                  # Booking flow
-│   └── admin/                     # Admin components
+│   ├── ui/                    # Base UI components
+│   ├── layout/                 # Header, Footer
+│   ├── home/
+│   ├── doctors/
+│   ├── booking/
+│   └── admin/
 ├── lib/
-│   ├── data/                     # Mock data
-│   ├── utils/                    # Utilities
-│   └── hooks/                    # Custom hooks
-└── types/                        # TypeScript types
+│   ├── data/                  # Mock data
+│   └── utils/                  # Utilities
+└── types/                      # TypeScript types
 ```
 
 ## Core Features
 
 ### 1. Homepage
-- Hero with gradient background, CTAs (Book Appointment, Call Now)
-- Quick action cards (Doctors, Specialties, Facilities, Room Rates)
-- Emergency banner (24x7 services)
+- Hero with dark theme and featured doctors circle
+- Quick action cards (Doctors, Book, Rooms, Insurance)
+- Departments grid
+- Services listing
 - Testimonials carousel
-- Embedded map (Kalyan location)
-- Sticky floating CTA button
+- Trust badges (ISO, NABH, etc.)
 
-### 2. Doctors / Panel
-- Grid/list view of doctors
-- Filters: department, availability, fees
-- Doctor profile cards with photo, specialty, experience, fees
-- Individual doctor profile pages
-- Real-time availability indicators
+### 2. Doctors
+- Grid view with filters
+- Doctor cards with images
+- Search by name/specialty
+- Filter by department
 
-### 3. Appointment Booking System
-- Multi-step wizard: Department → Doctor → Date/Time → Patient Details
-- Real-time slot availability from Google Calendar
-- WhatsApp/Phone fallback options
-- Booking confirmation with details
-- Reschedule/Cancel functionality
-- Email notification simulation
+### 3. Departments
+- List of all departments
+- Department cards with descriptions
 
-### 4. Admin Panel
-- Dashboard with analytics
-- Doctor management (CRUD)
-- Schedule management
-- Date blocking
-- Booking management (approve/cancel/reschedule)
-- Room/Rate management
-- Content management
-- Protected by auth
+### 4. Appointment Booking System
+- Multi-step wizard: Department → Doctor → Date/Time → Patient Details → Confirm
+- Real-time slot generation
+- Booking confirmation with ID
+- localStorage persistence
 
-### 5. Google Calendar Integration
-- OAuth2 authentication
-- Per-doctor calendar sync
-- Double-booking prevention
-- Availability slots from calendar events
-- Create/update appointments in calendar
+### 5. Admin Panel
+- Dashboard with stats
+- Appointment management (approve/cancel/complete)
+- Doctor availability toggle
+- Login: admin@sarvkalyanam.com / admin123
 
-### 6. Rooms, Rates, Facilities
-- Room categories: ICU, Private, Semi-Private, General
-- Transparent pricing tables
-- Service listings: Pharmacy, Lab, Ambulance, etc.
-- Amenities grid
+### 6. Additional Pages
+- Rooms & Rates
+- Facilities
+- About
+- Contact (with form)
+- FAQ (accordion)
+- Insurance/TPA
 
-### 7. Additional Pages
-- About (hospital history, mission, team)
-- Departments (specialty listings)
-- Insurance/TPA (accepted insurers)
-- Contact (form, map, details)
-- FAQ (accordion style)
-
-## API Design
-
-### Endpoints
+## API Endpoints
 ```
 GET    /api/doctors              - List doctors
-GET    /api/doctors/[id]         - Get doctor details
-GET    /api/doctors/[id]/slots   - Get available slots
-POST   /api/appointments         - Create appointment
-GET    /api/appointments         - List appointments
-PATCH  /api/appointments/[id]    - Update appointment
-DELETE /api/appointments/[id]    - Cancel appointment
-GET    /api/rooms                - List rooms
-POST   /api/calendar/sync        - Sync with Google Calendar
-POST   /api/calendar/auth        - Google OAuth
+GET    /api/doctors/[id]        - Get doctor details
+POST   /api/appointments       - Create appointment
+GET    /api/appointments       - List appointments
 ```
-
-## Authentication
-- Admin: Email/password (simulated)
-- Patient: Phone number based booking
-- JWT tokens for session management
-
-## SEO
-- Semantic HTML
-- Meta tags per page
-- Open Graph tags
-- Schema.org medical organization markup
-- Sitemap generation ready
-
-## Performance
-- Server-side rendering
-- Image optimization (next/image)
-- Lazy loading components
-- Minimal bundle size
 
 ## Responsive Breakpoints
 - Mobile: < 640px
 - Tablet: 640px - 1024px
 - Desktop: > 1024px
+
+## Image Sources
+- Dr. Pankaj Kasar: https://www.surakshaheartclinic.com/wp-content/uploads/2022/02/Untitled-design3.png
+- Placeholders: placehold.co (fallback)
+
+## Admin Credentials
+- **URL:** /admin
+- **Email:** admin@sarvkalyanam.com
+- **Password:** admin123
