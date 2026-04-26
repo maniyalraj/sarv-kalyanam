@@ -2,10 +2,10 @@
 
 import * as React from "react"
 import { Suspense } from "react"
-import { useRouter, useParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Check, ArrowLeft, ArrowRight, Calendar, Clock, User, Phone, Mail, MessageSquare, Heart, Star, MapPin } from "lucide-react"
-import { Button, Card, CardContent, Input, Label, Textarea, Badge } from "@/components/ui"
+import { Check, ArrowLeft, ArrowRight, Calendar, Clock, User, Phone, Mail, Heart, Star, MapPin } from "lucide-react"
+import { Button, Card, CardContent, Input, Label, Textarea } from "@/components/ui"
 import { doctors, departments } from "@/lib/data"
 import { TimeSlot } from "@/types"
 import { formatCurrency, generateId } from "@/lib/utils"
@@ -16,6 +16,15 @@ const steps = [
   { id: 3, name: "Date & Time" },
   { id: 4, name: "Details" },
   { id: 5, name: "Confirm" },
+]
+
+const doctorImages = [
+  "https://placehold.co/200x200/0f766e/ffffff?text=Dr",
+  "https://placehold.co/200x200/0f766e/ffffff?text=Dr",
+  "https://placehold.co/200x200/0f766e/ffffff?text=Dr",
+  "https://placehold.co/200x200/0f766e/ffffff?text=Dr",
+  "https://placehold.co/200x200/0f766e/ffffff?text=Dr",
+  "https://placehold.co/200x200/0f766e/ffffff?text=Dr",
 ]
 
 function generateTimeSlots(): TimeSlot[] {
@@ -139,13 +148,13 @@ function BookingContent() {
 
   if (submitted) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-primary-50 px-4">
-        <Card className="mx-auto max-w-md">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-primary-50 px-4 py-12">
+        <Card className="mx-auto max-w-md w-full">
           <CardContent className="p-8 text-center">
             <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary-100">
               <Check className="h-10 w-10 text-primary-600" />
             </div>
-            <h2 className="text-2xl font-bold text-dark">
+            <h2 className="text-2xl font-bold text-slate-900">
               Appointment Booked!
             </h2>
             <p className="mt-2 text-slate-600">
@@ -158,19 +167,19 @@ function BookingContent() {
             <div className="mt-6 space-y-2 text-left">
               <div className="flex justify-between text-sm">
                 <span className="text-slate-500">Doctor</span>
-                <span className="font-medium text-dark">{selectedDoctorData?.name}</span>
+                <span className="font-medium text-slate-900">{selectedDoctorData?.name}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-500">Specialty</span>
-                <span className="font-medium text-dark">{selectedDoctorData?.specialty}</span>
+                <span className="font-medium text-slate-900">{selectedDoctorData?.specialty}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-500">Date</span>
-                <span className="font-medium text-dark">{selectedDate}</span>
+                <span className="font-medium text-slate-900">{selectedDate}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-500">Time</span>
-                <span className="font-medium text-dark">{selectedTime}</span>
+                <span className="font-medium text-slate-900">{selectedTime}</span>
               </div>
             </div>
             <div className="mt-6 flex gap-4">
@@ -191,9 +200,9 @@ function BookingContent() {
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 to-primary-50 py-12">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 w-full">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-dark">
+          <h1 className="text-3xl font-bold text-slate-900">
             Book Your <span className="text-primary-600">Appointment</span>
           </h1>
           <p className="mt-2 text-slate-600">Schedule your visit with our expert doctors</p>
@@ -205,7 +214,7 @@ function BookingContent() {
           <CardContent className="p-6">
             {step === 1 && (
               <div className="space-y-3">
-                <h2 className="text-xl font-semibold text-dark mb-4">Select Department</h2>
+                <h2 className="text-xl font-semibold text-slate-900 mb-4">Select Department</h2>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {departments.map((dept) => (
                     <button
@@ -223,7 +232,7 @@ function BookingContent() {
                         <Heart className="h-5 w-5" />
                       </div>
                       <div>
-                        <p className="font-medium text-dark">{dept.name}</p>
+                        <p className="font-medium text-slate-900">{dept.name}</p>
                         <p className="text-xs text-slate-500">{dept.description}</p>
                       </div>
                       {selectedDept === dept.name && (
@@ -237,12 +246,12 @@ function BookingContent() {
 
             {step === 2 && (
               <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-dark mb-4">Select Doctor</h2>
+                <h2 className="text-xl font-semibold text-slate-900 mb-4">Select Doctor</h2>
                 {filteredDoctors.length === 0 ? (
                   <p className="text-center py-8 text-slate-500">No doctors available</p>
                 ) : (
                   <div className="space-y-3">
-                    {filteredDoctors.map((doctor) => (
+                    {filteredDoctors.map((doctor, idx) => (
                       <button
                         key={doctor.id}
                         onClick={() => setSelectedDoctor(doctor.id)}
@@ -253,12 +262,12 @@ function BookingContent() {
                         }`}
                       >
                         <img 
-                          src={`https://images.unsplash.com/photo-${doctor.id === '1' ? '1612349317150-e973f38f1d8c' : '1559839734-2b71ea197ec2'}?w=100&q=80`}
+                          src={doctorImages[idx] || doctorImages[0]}
                           alt={doctor.name}
                           className="h-14 w-14 rounded-xl object-cover"
                         />
                         <div className="flex-1">
-                          <p className="font-medium text-dark">{doctor.name}</p>
+                          <p className="font-medium text-slate-900">{doctor.name}</p>
                           <p className="text-sm text-primary-600">{doctor.specialty}</p>
                           <p className="text-xs text-slate-500">
                             {doctor.experience} yrs exp • {formatCurrency(doctor.fees)}
@@ -276,7 +285,7 @@ function BookingContent() {
 
             {step === 3 && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold text-dark mb-4">Select Date & Time</h2>
+                <h2 className="text-xl font-semibold text-slate-900 mb-4">Select Date & Time</h2>
                 <div>
                   <Label className="text-slate-700">Select Date</Label>
                   <Input
@@ -319,7 +328,7 @@ function BookingContent() {
 
             {step === 4 && (
               <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-dark mb-4">Patient Details</h2>
+                <h2 className="text-xl font-semibold text-slate-900 mb-4">Patient Details</h2>
                 <div className="space-y-3">
                   <div>
                     <Label className="text-slate-700">Full Name *</Label>
@@ -369,17 +378,17 @@ function BookingContent() {
 
             {step === 5 && (
               <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-dark mb-4">Review & Confirm</h2>
+                <h2 className="text-xl font-semibold text-slate-900 mb-4">Review & Confirm</h2>
                 
                 <div className="rounded-xl bg-primary-50 p-4">
                   <div className="flex items-center gap-3">
                     <img 
-                      src={`https://images.unsplash.com/photo-1612349317150-e973f38f1d8c?w=100&q=80`}
+                      src={selectedDoctor ? doctorImages[parseInt(selectedDoctor) - 1] || doctorImages[0] : doctorImages[0]}
                       alt={selectedDoctorData?.name}
                       className="h-14 w-14 rounded-xl object-cover"
                     />
                     <div>
-                      <p className="font-semibold text-dark">{selectedDoctorData?.name}</p>
+                      <p className="font-semibold text-slate-900">{selectedDoctorData?.name}</p>
                       <p className="text-sm text-primary-600">{selectedDoctorData?.specialty}</p>
                     </div>
                   </div>
@@ -391,20 +400,20 @@ function BookingContent() {
                       <Calendar className="h-4 w-4" />
                       <span className="text-xs">Date</span>
                     </div>
-                    <p className="mt-1 font-medium text-dark">{selectedDate}</p>
+                    <p className="mt-1 font-medium text-slate-900">{selectedDate}</p>
                   </div>
                   <div className="rounded-xl bg-slate-50 p-3">
                     <div className="flex items-center gap-2 text-slate-500">
                       <Clock className="h-4 w-4" />
                       <span className="text-xs">Time</span>
                     </div>
-                    <p className="mt-1 font-medium text-dark">{selectedTime}</p>
+                    <p className="mt-1 font-medium text-slate-900">{selectedTime}</p>
                   </div>
                 </div>
 
                 <div className="rounded-xl bg-slate-50 p-3">
                   <p className="text-xs text-slate-500">Patient</p>
-                  <p className="font-medium text-dark">{patientName}</p>
+                  <p className="font-medium text-slate-900">{patientName}</p>
                   <p className="text-sm text-slate-600">{patientPhone}</p>
                   {patientEmail && <p className="text-sm text-slate-600">{patientEmail}</p>}
                 </div>

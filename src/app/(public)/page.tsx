@@ -6,9 +6,9 @@ import { Button, Card, CardContent } from "@/components/ui"
 import { departments, doctors, testimonials, services } from "@/lib/data"
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1631815588090-d4bfec5b5a824?w=800&q=80",
-  "https://images.unsplash.com/photo-1576091160550-2173dba0ef3b?w=800&q=80", 
-  "https://images.unsplash.com/photo-1519494026892-80bbd2d1b3d4?w=800&q=80",
+  "https://placehold.co/1920x1080/0f766e/ffffff?text=Hospital+Hero",
+  "https://placehold.co/1920x1080/0f766e/ffffff?text=Medical+Care", 
+  "https://placehold.co/1920x1080/0f766e/ffffff?text=Expert+Doctors",
 ]
 
 const stats = [
@@ -18,8 +18,32 @@ const stats = [
   { label: "Beds Capacity", value: "200+" },
 ]
 
+const departmentImages: Record<string, string> = {
+  "Cardiology": "https://placehold.co/400x300/ef4444/ffffff?text=Cardiology",
+  "Neurology": "https://placehold.co/400x300/8b5cf6/ffffff?text=Neurology",
+  "Orthopedics": "https://placehold.co/400x300/f59e0b/ffffff?text=Orthopedics",
+  "Pediatrics": "https://placehold.co/400x300/10b981/ffffff?text=Pediatrics",
+  "Gynecology": "https://placehold.co/400x300/ec4899/ffffff?text=Gynecology",
+  "General Medicine": "https://placehold.co/400x300/3b82f6/ffffff?text=General+Medicine",
+  "Emergency": "https://placehold.co/400x300/dc2626/ffffff?text=Emergency",
+  "Diagnostics": "https://placehold.co/400x300/6366f1/ffffff?text=Diagnostics",
+}
+
+const doctorImages = [
+  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Sharma",
+  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Patel", 
+  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Kumar",
+  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Reddy",
+  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Singh",
+  "https://placehold.co/300x300/0f766e/ffffff?text=Dr+Joshi",
+]
+
+const doctorsPageImage = "https://placehold.co/1920x600/0f766e/ffffff?text=Our+Expert+Doctors"
+const emergencyImage = "https://placehold.co/1920x800/dc2626/ffffff?text=Emergency+Care"
+const bookingDoctorImage = "https://placehold.co/200x200/0f766e/ffffff?text=Doctor"
+
 function FeatureCard({ icon: Icon, title, description, delay }: { icon: any; title: string; description: string; delay: string }) {
-  return (
+  return ( 
     <div 
       className="group relative overflow-hidden rounded-3xl bg-white p-8 shadow-soft transition-all duration-500 hover:shadow-hover hover:-translate-y-1"
       style={{ animationDelay: delay }}
@@ -29,7 +53,7 @@ function FeatureCard({ icon: Icon, title, description, delay }: { icon: any; tit
         <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 shadow-lg">
           <Icon className="h-7 w-7 text-white" />
         </div>
-        <h3 className="mb-2 text-xl font-bold text-dark">{title}</h3>
+        <h3 className="mb-2 text-xl font-bold text-slate-900">{title}</h3>
         <p className="text-slate-600">{description}</p>
       </div>
     </div>
@@ -49,26 +73,16 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] overflow-hidden bg-dark">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1519494026892-80bbd2d1b3d4?w=1920&q=80"
-            alt="Hospital"
-            className="h-full w-full object-cover opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-dark/40" />
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(15,118,110,0.3),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(15,118,110,0.2),transparent_40%)]" />
         </div>
         
-        {/* Floating elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute left-10 top-1/4 h-64 w-64 rounded-full bg-primary-500/10 blur-3xl animate-float" />
-          <div className="absolute bottom-1/4 right-10 h-96 w-96 rounded-full bg-accent/10 blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-        </div>
-
         <div className="relative mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-sm font-medium text-primary-100 backdrop-blur-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5 text-sm font-medium text-primary-300 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400"></span>
@@ -126,7 +140,7 @@ export default function HomePage() {
       </section>
 
       {/* Quick Actions */}
-      <section className="relative -mt-20 px-4">
+      <section className="relative px-4 py-12">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <Link href="/doctors" className="group">
@@ -135,7 +149,7 @@ export default function HomePage() {
                   <Stethoscope className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-dark">Find a Doctor</h3>
+                  <h3 className="text-lg font-bold text-slate-900">Find a Doctor</h3>
                   <p className="text-sm text-slate-500">{doctors.length}+ Expert Specialists</p>
                 </div>
               </div>
@@ -147,7 +161,7 @@ export default function HomePage() {
                   <Clock className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-dark">Book Online</h3>
+                  <h3 className="text-lg font-bold text-slate-900">Book Online</h3>
                   <p className="text-sm text-slate-500">Instant Appointment</p>
                 </div>
               </div>
@@ -159,7 +173,7 @@ export default function HomePage() {
                   <Building2 className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-dark">Room & Rates</h3>
+                  <h3 className="text-lg font-bold text-slate-900">Room & Rates</h3>
                   <p className="text-sm text-slate-500">Transparent Pricing</p>
                 </div>
               </div>
@@ -167,11 +181,11 @@ export default function HomePage() {
             
             <Link href="/insurance" className="group">
               <div className="flex items-center gap-4 rounded-2xl bg-white p-6 shadow-card transition-all group-hover:-translate-y-1 group-hover:shadow-hover">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent-dark shadow-lg">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 shadow-lg">
                   <Award className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-dark">Insurance</h3>
+                  <h3 className="text-lg font-bold text-slate-900">Insurance</h3>
                   <p className="text-sm text-slate-500">Cashless Treatment</p>
                 </div>
               </div>
@@ -185,7 +199,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div className="text-center md:text-left">
-              <h2 className="text-3xl font-bold text-dark md:text-4xl">Our Specialties</h2>
+              <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">Our Specialties</h2>
               <p className="mt-2 text-slate-600">Comprehensive care across all medical disciplines</p>
             </div>
             <Link href="/departments">
@@ -197,7 +211,7 @@ export default function HomePage() {
           </div>
           
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {departments.slice(0, 8).map((dept, idx) => (
+            {departments.slice(0, 8).map((dept) => (
               <Link key={dept.id} href="/departments">
                 <div className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-card transition-all hover:shadow-hover hover:-translate-y-1">
                   <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary-50 opacity-0 transition-opacity group-hover:opacity-100 group-hover:scale-150" />
@@ -205,7 +219,7 @@ export default function HomePage() {
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600">
                       <Heart className="h-6 w-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-dark group-hover:text-primary-600">{dept.name}</h3>
+                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-primary-600">{dept.name}</h3>
                     <p className="mt-1 text-sm text-slate-500 line-clamp-2">{dept.description}</p>
                   </div>
                 </div>
@@ -219,7 +233,7 @@ export default function HomePage() {
       <section className="bg-gradient-to-br from-slate-50 to-white py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-dark md:text-4xl">Why Choose SarvKalyanam</h2>
+            <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">Why Choose SarvKalyanam</h2>
             <p className="mt-2 text-slate-600">Excellence in healthcare since 2000</p>
           </div>
           
@@ -227,7 +241,7 @@ export default function HomePage() {
             <FeatureCard 
               icon={Users}
               title="Expert Team"
-              description="Our team of 50+ highly qualified doctors Across 15+ specialties ensures you receive the best medical care."
+              description="Our team of 50+ highly qualified doctors across 15+ specialties ensures you receive the best medical care."
               delay="0ms"
             />
             <FeatureCard 
@@ -247,14 +261,9 @@ export default function HomePage() {
       </section>
 
       {/* Emergency CTA */}
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1631815588090-d4bfec5b5a824?w=1920&q=80"
-            alt="Emergency"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-dark/80" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-red-600 to-red-700 py-24">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
         </div>
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -262,13 +271,13 @@ export default function HomePage() {
             <h2 className="text-4xl font-bold text-white md:text-5xl">
               Need Emergency Care?
             </h2>
-            <p className="mt-4 text-lg text-slate-300">
+            <p className="mt-4 text-lg text-red-100">
               Our 24x7 emergency department is equipped to handle all medical emergencies. 
               Call now for immediate assistance.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Link href="tel:+919867452190">
-                <Button size="xl" className="bg-red-500 hover:bg-red-600">
+                <Button size="xl" className="bg-white text-red-600 hover:bg-red-50">
                   <Phone className="mr-2 h-5 w-5" />
                   +91 9867 4521 90
                 </Button>
@@ -287,7 +296,7 @@ export default function HomePage() {
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-dark md:text-4xl">Our Services</h2>
+            <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">Our Services</h2>
             <p className="mt-2 text-slate-600">Comprehensive healthcare under one roof</p>
           </div>
           
@@ -301,7 +310,7 @@ export default function HomePage() {
                   <CheckCircle className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-dark">{service.name}</h3>
+                  <h3 className="text-lg font-bold text-slate-900">{service.name}</h3>
                   <p className="mt-1 text-sm text-slate-600">{service.description}</p>
                   {service.waitingTime && (
                     <p className="mt-2 text-xs font-medium text-primary-600">
@@ -352,7 +361,7 @@ export default function HomePage() {
       {/* Final CTA */}
       <section className="py-24">
         <div className="mx-auto max-w-3xl px-4 text-center">
-          <h2 className="text-4xl font-bold text-dark md:text-5xl">
+          <h2 className="text-4xl font-bold text-slate-900 md:text-5xl">
             Ready to Experience Quality Healthcare?
           </h2>
           <p className="mt-4 text-lg text-slate-600">
